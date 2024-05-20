@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  db:
+    image: sakiladb/postgres
+    ports:
+      - "5432:5432"
