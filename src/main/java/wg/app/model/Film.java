@@ -19,21 +19,21 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "film", schema = "sakila")
+@Table(name = "film", schema = "public")
 public class Film {
 
     public Film() {}
 
-    public Film(Long filmId, String title, Long length) {
+    public Film(Short filmId, String title, short length) {
         this.filmId = filmId;
         this.title = title;
         this.length = length;
     }
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "film_id")
-    private Long filmId;
+    private Short filmId;
     @Basic
     @Column(name = "title")
     private String title;
@@ -42,7 +42,7 @@ public class Film {
     private String description;
     @Basic
     @Column(name = "language_id")
-    private Long languageId;
+    private short languageId;
     @Basic
     @Column(name = "original_language_id")
     private Short originalLanguageId;
@@ -50,20 +50,17 @@ public class Film {
     @Column(name = "rental_duration")
     private short rentalDuration;
     @Basic
-    @Column(name = "rental_rate", columnDefinition = "decimal(4,2)")
-    private Float rentalRate;
+    @Column(name = "rental_rate")
+    private BigDecimal rentalRate;
     @Basic
     @Column(name = "length")
-    private Long length;
+    private short length;
     @Basic
     @Column(name = "replacement_cost")
     private BigDecimal replacementCost;
     @Basic
     @Column(name = "rating", columnDefinition = "enum('G', 'PG', 'PG-13', 'R', 'NC-17')")
     private String rating;
-    @Basic
-    @Column(name = "special_features", columnDefinition = "set('Trailers', 'Commentaries', 'Deleted Scenes', 'Behind the Scenes')")
-    private String specialFeatures;
     @Basic
     @Column(name = "last_update")
     private Timestamp lastUpdate;
@@ -75,11 +72,11 @@ public class Film {
     )
     private List<Actor> actors = new ArrayList<>();
 
-    public Long getFilmId() {
+    public Short getFilmId() {
         return filmId;
     }
 
-    public void setFilmId(Long filmId) {
+    public void setFilmId(Short filmId) {
         this.filmId = filmId;
     }
 
@@ -99,11 +96,11 @@ public class Film {
         this.description = description;
     }
 
-    public Long getLanguageId() {
+    public short getLanguageId() {
         return languageId;
     }
 
-    public void setLanguageId(Long languageId) {
+    public void setLanguageId(short languageId) {
         this.languageId = languageId;
     }
 
@@ -123,19 +120,19 @@ public class Film {
         this.rentalDuration = rentalDuration;
     }
 
-    public Float getRentalRate() {
+    public BigDecimal getRentalRate() {
         return rentalRate;
     }
 
-    public void setRentalRate(Float rentalRate) {
+    public void setRentalRate(BigDecimal rentalRate) {
         this.rentalRate = rentalRate;
     }
 
-    public Long getLength() {
+    public short getLength() {
         return length;
     }
 
-    public void setLength(Long length) {
+    public void setLength(short length) {
         this.length = length;
     }
 
@@ -155,14 +152,6 @@ public class Film {
         this.rating = rating;
     }
 
-    public String getSpecialFeatures() {
-        return specialFeatures;
-    }
-
-    public void setSpecialFeatures(String specialFeatures) {
-        this.specialFeatures = specialFeatures;
-    }
-
     public Timestamp getLastUpdate() {
         return lastUpdate;
     }
@@ -176,12 +165,12 @@ public class Film {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Film film = (Film) o;
-        return Objects.equals(filmId, film.filmId) && languageId == film.languageId && rentalDuration == film.rentalDuration && Objects.equals(title, film.title) && Objects.equals(description, film.description) && Objects.equals(originalLanguageId, film.originalLanguageId) && Objects.equals(rentalRate, film.rentalRate) && Objects.equals(length, film.length) && Objects.equals(replacementCost, film.replacementCost) && Objects.equals(rating, film.rating) && Objects.equals(specialFeatures, film.specialFeatures) && Objects.equals(lastUpdate, film.lastUpdate);
+        return Objects.equals(filmId, film.filmId) && languageId == film.languageId && rentalDuration == film.rentalDuration && Objects.equals(title, film.title) && Objects.equals(description, film.description) && Objects.equals(originalLanguageId, film.originalLanguageId) && Objects.equals(rentalRate, film.rentalRate) && Objects.equals(length, film.length) && Objects.equals(replacementCost, film.replacementCost) && Objects.equals(rating, film.rating) && Objects.equals(lastUpdate, film.lastUpdate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(filmId, title, description, languageId, originalLanguageId, rentalDuration, rentalRate, length, replacementCost, rating, specialFeatures, lastUpdate);
+        return Objects.hash(filmId, title, description, languageId, originalLanguageId, rentalDuration, rentalRate, length, replacementCost, rating, lastUpdate);
     }
 
     public List<Actor> getActors() {

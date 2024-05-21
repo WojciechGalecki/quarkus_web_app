@@ -8,12 +8,12 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "actor", schema = "sakila")
+@Table(name = "actor", schema = "public")
 public class Actor {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "actor_id")
-    private Long actorId;
+    private Short actorId;
     @Basic
     @Column(name = "first_name")
     private String firstName;
@@ -26,11 +26,11 @@ public class Actor {
     @ManyToMany(mappedBy = "actors")
     private Set<Film> films = new HashSet<>();
 
-    public Long getActorId() {
+    public Short getActorId() {
         return actorId;
     }
 
-    public void setActorId(Long actorId) {
+    public void setActorId(Short actorId) {
         this.actorId = actorId;
     }
 
